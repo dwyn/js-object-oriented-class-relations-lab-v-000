@@ -1,3 +1,9 @@
+let store = { 
+  drivers: [], 
+  passengers: [], 
+  trips: [] 
+};
+
 let driverId = 0;
 class Driver {
   constructor(name) {
@@ -38,3 +44,26 @@ class Passenger {
   }
 }
 
+let tripId = 0;
+class Trip {
+  constructor(driver, passenger) {
+
+    this.id = ++tripId
+    if (passenger) {
+      this.passengerId = passenger.id
+    }
+    if (driver) {
+      this.driverId = driver.id
+    }
+
+    store.trips.push(this)
+  }
+
+  driver() {
+    return store.drivers.find(driver => driver.id === this.driverId)
+  }
+
+  passenger() {
+    return store.passengers.find(passenger => passenger.id === this.passengerId)
+  }
+}
